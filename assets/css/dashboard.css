@@ -1,0 +1,102 @@
+/* Tabela estática das importações recentes do Dashboard. */
+.imports-panel {
+	margin-top: 20px;
+	padding: 17px 18px 13px;
+	border: 1px solid var(--line);
+	border-radius: 11px;
+	background: var(--surface);
+}
+
+.imports-panel h2 {
+	margin: 0 0 16px;
+	font-size: 16px;
+}
+
+.imports-panel thead {
+	background: #f7f8fa;
+}
+
+.table-wrap {
+	overflow-x: auto;
+}
+
+.imports-panel .table-wrap {
+	margin-right: -18px;
+	margin-left: -18px;
+}
+
+table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 12px;
+}
+
+.imports-panel th,
+.imports-panel td {
+	padding: 13px 18px;
+	border-bottom: 1px solid #edf0f4;
+	text-align: left;
+}
+
+.imports-panel tr:last-child td {
+	border-bottom: 0;
+}
+
+.imports-panel th {
+	padding-top: 10px;
+	color: #75839a;
+	font-size: 9px;
+	font-weight: 700;
+	text-transform: uppercase;
+}
+
+.imports-panel th:nth-child(1),
+.imports-panel td:nth-child(1) {
+	width: 40%;
+}
+
+.imports-panel th:nth-child(2),
+.imports-panel td:nth-child(2) {
+	width: 24%;
+}
+
+.imports-panel th:nth-child(3),
+.imports-panel td:nth-child(3) {
+	width: 15%;
+}
+
+.imports-panel th:nth-child(4),
+.imports-panel td:nth-child(4) {
+	width: 13%;
+}
+
+.status {
+	display: inline-flex;
+	min-width: 84px;
+	height: 24px;
+	align-items: center;
+	justify-content: center;
+	border-radius: 999px;
+	font-size: 11px;
+	font-weight: 700;
+}
+
+.status.success {
+	background: #d7f1df;
+	color: #16813b;
+}
+
+.status.warning {
+	background: #fff0c7;
+	color: #b66a08;
+}
+
+.errors {
+	color: #ef3f4d;
+	font-weight: 700;
+}
+
+.empty-state {
+	padding: 24px 0 14px;
+	text-align: center;
+}

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="theme-color" content="#3D86FF">
+	<title>Gerenciar cadastros | Connect Ylon</title>
+	<link rel="manifest" href="../manifest.webmanifest">
+	<link rel="icon" type="image/svg+xml" href="../assets/img/connect-ylon-icon.svg">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../assets/css/base.css">
+	<link rel="stylesheet" href="../assets/css/dashboard.css">
+	<link rel="stylesheet" href="../assets/css/clients.css">
+	<link rel="stylesheet" href="../assets/css/manage-clients.css">
+	<link rel="stylesheet" href="../assets/css/audit.css">
+	<link rel="stylesheet" href="../assets/css/users.css">
+	<link rel="stylesheet" href="../assets/css/login.css">
+	<script src="../assets/pwa.js" defer></script>
+	<script src="../assets/sidebar.js" defer></script>
+	<script src="../assets/dialog-scroll-lock.js" defer></script>
+	<script src="../assets/row-selection.js" defer></script>
+	<script src="../assets/manage-clients.js" defer></script>
+</head>
+<body>
+	<connect-ylon-sidebar base="../"></connect-ylon-sidebar>
+	<main class="content manage-page">
+		<header class="page-header">
+			<div>
+				<h1>Gerenciar cadastros</h1>
+				<p>Importe, edite e mantenha os dados dos clientes sempre atualizados.</p>
+			</div>
+			<p class="profile">Glaucia · Gerência</p>
+		</header>
+
+		<section class="manage-top" aria-label="Importar clientes">
+			<div class="upload-panel">
+				<div class="upload-dropzone" id="upload-dropzone" tabindex="0">
+					<span class="upload-icon" aria-hidden="true">↑</span>
+					<p>Arraste o arquivo .txt do Moni Software aqui</p>
+					<button class="button button-primary" id="select-file" type="button">Selecionar arquivo</button>
+					<input id="import-file" type="file" accept=".txt,text/plain" hidden>
+				</div>
+				<p class="upload-message" id="upload-message" aria-live="polite"></p>
+			</div>
+
+			<section class="import-preview" aria-labelledby="preview-title">
+				<div class="preview-heading">
+					<div>
+						<h2 id="preview-title">Pré-visualização da importação</h2>
+						<p id="import-filename">clientes_2026-11-12.txt</p>
+					</div>
+					<button class="text-button" id="download-errors" type="button">Baixar relatório de erros</button>
+				</div>
+				<dl class="preview-stats">
+					<div><dt>Novos clientes</dt><dd class="positive">42</dd></div>
+					<div><dt>Existentes (serão atualizados)</dt><dd class="accent-text">118</dd></div>
+					<div><dt>Linhas com erro</dt><dd class="error-text">3</dd></div>
+				</dl>
+				<div class="preview-actions">
+					<button class="button button-secondary" id="cancel-import" type="button">Cancelar</button>
+					<button class="button button-primary" id="confirm-import" type="button">Confirmar importação</button>
+				</div>
+			</section>
+		</section>
+
+		<section class="manage-error-banner" aria-label="Cadastros com erros">
+			<span class="error-alert-icon" aria-hidden="true">!</span>
+			<div>
+				<strong>7 clientes com dados incompletos ou inválidos</strong>
+				<p>Corrija os cadastros para que os técnicos tenham sempre os dados certos.</p>
+			</div>
+			<button class="button button-danger-outline" id="show-errors" type="button">Ver clientes com erro</button>
+		</section>
+
+		<section class="manage-clients-panel" aria-labelledby="manage-clients-title">
+			<div class="manage-table-heading">
+				<h2 id="manage-clients-title">Clientes cadastrados</h2>
+				<label class="search-field client-search-field" for="manage-search">
+					<svg aria-hidden="true" viewBox="0 0 24 24">
+						<path d="M10.8 18a7.2 7.2 0 1 1 0-14.4 7.2 7.2 0 0 1 0 14.4Zm5.1-2.1 4.1 4.1"/>
+					</svg>
+					<input id="manage-search" type="search" placeholder="Buscar por nome ou código" autocomplete="off">
+				</label>
+			</div>
+			<div class="manage-filters" role="group" aria-label="Filtrar clientes">
+				<button class="filter-chip active" type="button" data-filter="all">Todos (1.248)</button>
+				<button class="filter-chip error-filter" type="button" data-filter="errors"><span aria-hidden="true">●</span> Com erro de dados (7)</button>
+				<span class="manage-count" id="manage-count" aria-live="polite"></span>
+			</div>
+			<div class="table-wrap">
+				<table class="manage-table">
+					<thead>
+						<tr>
+							<th scope="col">Código</th>
+							<th scope="col">Nome</th>
+							<th scope="col">Equipamentos</th>
+							<th scope="col">Situação</th>
+							<th scope="col">Ações</th>
+						</tr>
+					</thead>
+					<tbody id="manage-clients-body"></tbody>
+				</table>
+				<p class="empty-state" id="manage-empty" hidden>Nenhum cliente encontrado.</p>
+			</div>
+			<p class="manage-footer" id="manage-footer">Mostrando 5 de 1.248 clientes</p>
+		</section>
+		<p class="manage-toast" id="manage-toast" role="status" aria-live="polite"></p>
+	</main>
+
+	<dialog class="edit-dialog" id="edit-dialog" aria-labelledby="edit-title">
+		<form id="edit-form" novalidate>
+			<header class="edit-heading">
+				<div>
+					<h2 id="edit-title">Editar cliente</h2>
+					<p id="edit-subtitle"></p>
+				</div>
+				<button class="edit-close" type="button" aria-label="Fechar edição">×</button>
+			</header>
+			<div class="edit-content">
+				<div class="edit-validation" id="edit-validation" role="alert" hidden></div>
+				<label class="edit-field">
+					<span>Nome do cliente</span>
+					<input id="edit-name" name="name" required>
+				</label>
+				<label class="edit-field">
+					<span>Código</span>
+					<input id="edit-code" name="code" readonly>
+				</label>
+				<h3 class="equipment-section-title">Equipamentos</h3>
+				<div class="edit-equipment-list" id="edit-equipment-list"></div>
+			</div>
+			<footer class="edit-actions">
+				<button class="button button-secondary" id="cancel-edit" type="button">Cancelar</button>
+				<button class="button button-primary" type="submit">Salvar alterações</button>
+			</footer>
+		</form>
+	</dialog>
+</body>
+</html>

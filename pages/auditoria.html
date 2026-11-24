@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="theme-color" content="#3D86FF">
+	<title>Auditoria | Connect Ylon</title>
+	<link rel="manifest" href="../manifest.webmanifest">
+	<link rel="icon" type="image/svg+xml" href="../assets/img/connect-ylon-icon.svg">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../assets/css/base.css">
+	<link rel="stylesheet" href="../assets/css/dashboard.css">
+	<link rel="stylesheet" href="../assets/css/clients.css">
+	<link rel="stylesheet" href="../assets/css/manage-clients.css">
+	<link rel="stylesheet" href="../assets/css/audit.css">
+	<link rel="stylesheet" href="../assets/css/users.css">
+	<link rel="stylesheet" href="../assets/css/login.css">
+	<script src="../assets/pwa.js" defer></script>
+	<script src="../assets/sidebar.js" defer></script>
+	<script src="../assets/dialog-scroll-lock.js" defer></script>
+	<script src="../assets/row-selection.js" defer></script>
+	<script src="../assets/audit-page.js" defer></script>
+</head>
+<body>
+	<connect-ylon-sidebar base="../"></connect-ylon-sidebar>
+	<main class="content audit-page">
+		<header class="page-header">
+			<div>
+				<h1>Auditoria</h1>
+				<p>Acompanhe os acessos e as alterações realizadas no sistema.</p>
+			</div>
+			<p class="profile">Glaucia · Gerência</p>
+		</header>
+
+		<section class="audit-summary" aria-label="Resumo da auditoria">
+			<article class="card">
+				<p>Registros no período</p>
+				<h2 id="audit-total">248</h2>
+			</article>
+			<article class="card">
+				<p>Consultas a clientes</p>
+				<h2 id="audit-consultations">186</h2>
+			</article>
+			<article class="card">
+				<p>Alterações de cadastro</p>
+				<h2 id="audit-changes">42</h2>
+			</article>
+			<article class="card">
+				<p>Acessos ao sistema</p>
+				<h2 id="audit-accesses">20</h2>
+			</article>
+		</section>
+
+		<form class="audit-filters" id="audit-filters">
+			<div class="audit-filter-row">
+				<label class="audit-filter-field">
+					<span>Período</span>
+					<select id="audit-period">
+						<option value="day">12/11/2026 a 12/11/2026</option>
+						<option value="7days">Últimos 7 dias</option>
+						<option value="30days">Últimos 30 dias</option>
+						<option value="all">Todo o período</option>
+					</select>
+				</label>
+				<label class="audit-filter-field">
+					<span>Usuário</span>
+					<select id="audit-user">
+						<option value="all">Todos os usuários</option>
+						<option value="Tec. Mateus">Tec. Mateus</option>
+						<option value="Tec. Silvio">Tec. Silvio</option>
+						<option value="Glaucia">Glaucia</option>
+						<option value="Tec. Bruno">Tec. Bruno</option>
+					</select>
+				</label>
+				<label class="audit-filter-field">
+					<span>Tipo de ação</span>
+					<select id="audit-action">
+						<option value="all">Todas as ações</option>
+						<option value="Consulta">Consulta</option>
+						<option value="Alteração">Alteração</option>
+						<option value="Acesso">Acesso</option>
+						<option value="Importação">Importação</option>
+					</select>
+				</label>
+				<div class="audit-filter-actions">
+					<button class="button button-primary" type="submit">Filtrar</button>
+					<button class="button button-secondary" id="clear-audit-filters" type="button">Limpar</button>
+				</div>
+			</div>
+			<label class="audit-search-field" for="audit-search">
+				<input id="audit-search" type="search" placeholder="Buscar por cliente, código ou descrição da atividade" autocomplete="off">
+			</label>
+		</form>
+
+		<section class="audit-history" aria-labelledby="audit-history-title">
+			<header class="audit-history-heading">
+				<h2 id="audit-history-title">Histórico de atividades</h2>
+				<span id="audit-period-count">248 registros no período</span>
+			</header>
+			<div class="table-wrap">
+				<table class="audit-table">
+					<thead>
+						<tr>
+							<th scope="col">Data e hora</th>
+							<th scope="col">Usuário</th>
+							<th scope="col">Ação</th>
+							<th scope="col">Registro</th>
+							<th scope="col">Origem</th>
+							<th scope="col">Detalhes</th>
+						</tr>
+					</thead>
+					<tbody id="audit-body"></tbody>
+				</table>
+				<p class="audit-empty" id="audit-empty" hidden>Nenhum registro encontrado para os filtros selecionados.</p>
+			</div>
+			<footer class="audit-table-footer">
+				<p id="audit-range">Mostrando 1–8 de 248 registros</p>
+				<nav class="audit-pagination" aria-label="Paginação do histórico">
+					<button class="audit-page-link" id="audit-previous" type="button">Anterior</button>
+					<div id="audit-page-numbers"></div>
+					<button class="audit-page-link next" id="audit-next" type="button">Próxima</button>
+				</nav>
+			</footer>
+		</section>
+	</main>
+
+	<dialog class="audit-detail-dialog" id="audit-detail-dialog" aria-labelledby="audit-detail-title">
+		<header class="audit-detail-heading">
+			<div>
+				<p id="audit-detail-date"></p>
+				<h2 id="audit-detail-title">Detalhes do registro</h2>
+			</div>
+			<button class="dialog-close" type="button" aria-label="Fechar detalhes">×</button>
+		</header>
+		<dl class="audit-detail-list" id="audit-detail-list"></dl>
+		<p class="audit-detail-description" id="audit-detail-description"></p>
+	</dialog>
+</body>
+</html>

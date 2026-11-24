@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="theme-color" content="#3D86FF">
+	<meta name="description" content="Acesse o painel de gerência Connect Ylon">
+	<title>Entrar | Connect Ylon</title>
+	<link rel="manifest" href="../manifest.webmanifest">
+	<link rel="icon" type="image/svg+xml" href="../assets/img/connect-ylon-icon.svg">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../assets/css/base.css">
+	<link rel="stylesheet" href="../assets/css/dashboard.css">
+	<link rel="stylesheet" href="../assets/css/clients.css">
+	<link rel="stylesheet" href="../assets/css/manage-clients.css">
+	<link rel="stylesheet" href="../assets/css/audit.css">
+	<link rel="stylesheet" href="../assets/css/users.css">
+	<link rel="stylesheet" href="../assets/css/login.css">
+	<script src="../assets/pwa.js" defer></script>
+	<script src="../assets/login.js" defer></script>
+</head>
+<body class="login-body">
+	<main class="login-shell">
+		<section class="login-card" aria-labelledby="login-title">
+			<header class="login-brand">
+				<img src="../assets/img/connect-ylon-stacked-light.svg" alt="Connect Ylon">
+				<p id="login-title">Painel da Gerência</p>
+			</header>
+
+			<form class="login-form" id="login-form" novalidate>
+				<label class="login-field" for="login-email">
+					<span>E-mail</span>
+					<input id="login-email" name="email" type="email" placeholder="gerencia@visatec.com.br" autocomplete="username" required>
+				</label>
+
+				<label class="login-field" for="login-password">
+					<span>Senha</span>
+					<span class="login-password-control">
+						<input id="login-password" name="password" type="password" placeholder="Digite sua senha" autocomplete="current-password" required>
+						<button class="password-visibility" id="toggle-password" type="button" aria-label="Mostrar senha" aria-pressed="false">
+							<svg viewBox="0 0 24 24" aria-hidden="true">
+								<path d="M2.5 12s3.4-6 9.5-6 9.5 6 9.5 6-3.4 6-9.5 6-9.5-6-9.5-6Z"/>
+								<circle cx="12" cy="12" r="2.6"/>
+								<path class="password-visibility-slash" d="m3 3 18 18"/>
+							</svg>
+						</button>
+					</span>
+				</label>
+
+				<p class="login-message" id="login-message" role="alert" hidden></p>
+				<button class="button button-primary login-submit" type="submit">Entrar</button>
+				<button class="login-forgot" id="forgot-password" type="button">Esqueci minha senha</button>
+			</form>
+		</section>
+	</main>
+</body>
+</html>

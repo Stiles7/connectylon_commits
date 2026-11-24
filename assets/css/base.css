@@ -1,0 +1,199 @@
+* {
+	box-sizing: border-box;
+}
+
+:root {
+	--sidebar-width: 205px;
+	--ink: #1d2433;
+	--accent: #3D86FF;
+	--surface: #ffffff;
+	--line: #e5e8ef;
+	scrollbar-color: #3D86FF #edf1f8;
+	scrollbar-width: thin;
+}
+
+*::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+	border-radius: 999px;
+	background: #edf1f8;
+}
+
+*::-webkit-scrollbar-thumb {
+	border: 2px solid #edf1f8;
+	border-radius: 999px;
+	background: linear-gradient(180deg, #3D86FF, #2864ed);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+	background: #2453dc;
+}
+
+*::-webkit-scrollbar-corner {
+	background: #edf1f8;
+}
+
+body {
+	margin: 0;
+	min-height: 100vh;
+	font-family: "DM Sans", sans-serif;
+	color: var(--ink);
+	background: #f4f6fa;
+}
+
+/* Estrutura compartilhada das páginas e estilos do Dashboard. */
+.content {
+	min-height: 100vh;
+	margin-left: var(--sidebar-width);
+	padding: 48px 54px;
+}
+
+.dashboard-page {
+	padding: 28px 27px;
+}
+
+.dashboard-page h1,
+.client-page h1 {
+	font-size: 24px;
+	line-height: 1.25;
+	letter-spacing: -0.5px;
+}
+
+.dashboard-page .page-header > div > p,
+.client-page .page-header > div > p {
+	font-size: 13px;
+}
+
+.dashboard-page .all-cards {
+	gap: 20px;
+	margin-top: 12px;
+}
+
+.dashboard-page .card {
+	min-height: 94px;
+	gap: 8px;
+	padding: 17px 16px;
+	border-radius: 14px;
+}
+
+.dashboard-page .card h2 {
+	font-size: 28px;
+}
+
+.client-page {
+	padding: 28px 27px;
+}
+
+.client-summary {
+	gap: 20px;
+	margin-top: 12px;
+}
+
+.client-summary .card {
+	min-height: 94px;
+	gap: 8px;
+	padding: 17px 16px;
+	border-radius: 14px;
+}
+
+.client-summary .card p {
+	font-size: 12px;
+}
+
+.client-summary .card h2 {
+	font-size: 28px;
+}
+
+.page-header {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 24px;
+}
+
+.content h1 {
+	margin: 0 0 5px;
+	font-size: 32px;
+	letter-spacing: -1px;
+}
+
+.content p {
+	margin: 0;
+	color: #7d8696;
+}
+
+.page-header .profile {
+	flex: 0 0 auto;
+	margin-top: 8px;
+	font-size: 12px;
+	color: #8692a8;
+}
+
+.all-cards {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 20px;
+	margin-top: 24px;
+}
+
+.card {
+	min-height: 126px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	padding: 24px 18px;
+	border: 1px solid var(--line);
+	border-radius: 11px;
+	background: var(--surface);
+}
+
+.card h2 {
+	margin: 0;
+	font-size: 30px;
+	line-height: 1;
+	font-weight: 700;
+}
+
+.card p {
+	margin: 0;
+	font-size: 12px;
+	color: #7d8696;
+}
+
+/* Campo de busca da lista de clientes. */
+.search-field {
+	height: 48px;
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 0 13px;
+	border: 1px solid #edf0f4;
+	border-radius: 8px;
+	background: #fafbfc;
+}
+
+.search-field svg {
+	width: 20px;
+	height: 20px;
+	fill: none;
+	stroke: #74849e;
+	stroke-width: 2;
+	stroke-linecap: round;
+}
+
+.search-field input {
+	width: 100%;
+	border: 0;
+	outline: 0;
+	background: transparent;
+	color: var(--ink);
+	font: inherit;
+	font-size: 13px;
+}
+
+.search-field input::placeholder {
+	color: #aab3c2;
+}

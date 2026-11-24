@@ -1,0 +1,18 @@
+{
+	"name": "Connect Ylon",
+	"short_name": "Connect Ylon",
+	"description": "Painel de gerência e consulta técnica Connect Ylon.",
+	"start_url": "./pages/tecnico.html",
+	"scope": "./",
+	"display": "standalone",
+	"background_color": "#f4f6fa",
+	"theme_color": "#3D86FF",
+	"icons": [
+		{
+			"src": "./assets/img/connect-ylon-app-icon.svg",
+			"sizes": "512x512",
+			"type": "image/svg+xml",
+			"purpose": "any"
+		}
+	]
+}

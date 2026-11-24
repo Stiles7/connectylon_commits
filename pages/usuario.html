@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="theme-color" content="#3D86FF">
+	<title>Usuários do app | Connect Ylon</title>
+	<link rel="manifest" href="../manifest.webmanifest">
+	<link rel="icon" type="image/svg+xml" href="../assets/img/connect-ylon-icon.svg">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../assets/css/base.css">
+	<link rel="stylesheet" href="../assets/css/dashboard.css">
+	<link rel="stylesheet" href="../assets/css/clients.css">
+	<link rel="stylesheet" href="../assets/css/manage-clients.css">
+	<link rel="stylesheet" href="../assets/css/audit.css">
+	<link rel="stylesheet" href="../assets/css/users.css">
+	<link rel="stylesheet" href="../assets/css/login.css">
+	<script src="../assets/pwa.js" defer></script>
+	<script src="../assets/sidebar.js" defer></script>
+	<script src="../assets/dialog-scroll-lock.js" defer></script>
+	<script src="../assets/row-selection.js" defer></script>
+	<script src="../assets/users-page.js" defer></script>
+</head>
+<body>
+	<connect-ylon-sidebar base="../"></connect-ylon-sidebar>
+	<main class="content users-page">
+		<header class="page-header">
+			<div>
+				<h1>Usuários do app</h1>
+				<p>Gerencie os acessos da equipe ao aplicativo.</p>
+			</div>
+			<p class="profile">Glaucia · Gerência</p>
+		</header>
+
+		<section class="users-panel" aria-labelledby="users-title">
+			<header class="users-panel-heading">
+				<h2 id="users-title">Usuários cadastrados</h2>
+				<span id="users-total">7 usuários no total</span>
+			</header>
+			<div class="table-wrap">
+				<table class="users-table">
+					<thead>
+						<tr>
+							<th scope="col">Nome / usuário</th>
+							<th scope="col">E-mail</th>
+							<th scope="col">Perfil</th>
+							<th scope="col">Status</th>
+							<th scope="col">Último acesso</th>
+							<th scope="col">Ações</th>
+						</tr>
+					</thead>
+					<tbody id="users-body"></tbody>
+				</table>
+				<p class="users-empty" id="users-empty" hidden>Nenhum usuário cadastrado.</p>
+			</div>
+		</section>
+		<button class="button button-primary users-new-button" id="new-user" type="button">Novo usuário</button>
+		<p class="users-toast" id="users-toast" role="status" aria-live="polite"></p>
+	</main>
+
+	<dialog class="user-editor-dialog" id="user-editor-dialog" aria-labelledby="user-editor-title">
+		<form id="user-form" novalidate>
+			<header class="user-editor-heading">
+				<div>
+					<h2 id="user-editor-title">Editar usuário</h2>
+					<p>Atualize os dados e o acesso ao aplicativo.</p>
+				</div>
+				<button class="user-close-button" id="close-user-editor" type="button">Fechar</button>
+			</header>
+			<div class="user-editor-content">
+				<p class="user-form-error" id="user-form-error" role="alert" hidden></p>
+				<label class="user-form-field">
+					<span>Nome completo *</span>
+					<input id="user-name" name="name" autocomplete="name" required>
+				</label>
+				<label class="user-form-field">
+					<span>E-mail *</span>
+					<input id="user-email" name="email" type="email" autocomplete="email" required>
+				</label>
+				<label class="user-form-field">
+					<span>Nome de usuário *</span>
+					<input id="user-username" name="username" autocomplete="username" required>
+				</label>
+				<label class="user-form-field user-password-field" id="user-password-field">
+					<span>Senha *</span>
+					<input id="user-password" name="password" type="password" autocomplete="new-password" required>
+				</label>
+				<label class="user-form-field">
+					<span>Perfil de acesso *</span>
+					<select id="user-role" name="role" required>
+						<option>Aux. Técnico</option>
+						<option>Supervisor</option>
+						<option>Técnico</option>
+						<option>Estoquista</option>
+						<option>CEO</option>
+						<option>Gerente</option>
+					</select>
+				</label>
+				<section class="user-security-box" id="user-security-box">
+					<h3>Segurança do acesso</h3>
+					<p>Precisa recuperar o acesso? Envie uma solicitação de redefinição para o e-mail cadastrado.</p>
+					<button class="button button-secondary" id="reset-user-password" type="button">Enviar redefinição de senha</button>
+					<p class="user-reset-message" id="user-reset-message" role="status" hidden></p>
+				</section>
+				<p class="user-inactive-note">Um usuário inativo não poderá acessar o aplicativo.</p>
+				<p class="user-required-note">* Campos obrigatórios</p>
+			</div>
+			<footer class="user-editor-actions">
+				<button class="button button-secondary" id="cancel-user-edit" type="button">Cancelar</button>
+				<button class="button button-primary" id="save-user-button" type="submit">Salvar alterações</button>
+			</footer>
+		</form>
+	</dialog>
+
+	<dialog class="user-delete-dialog" id="user-delete-dialog" aria-labelledby="delete-user-title">
+		<header class="delete-user-heading">
+			<h2 id="delete-user-title">Excluir usuário?</h2>
+			<p>O acesso deste usuário ao aplicativo será removido. Esta ação não pode ser desfeita.</p>
+		</header>
+		<div class="delete-user-summary">
+			<strong id="delete-user-name"></strong>
+			<span id="delete-user-email"></span>
+		</div>
+		<p class="delete-user-note">Os cadastros de clientes não serão excluídos.</p>
+		<footer class="delete-user-actions">
+			<button class="button button-secondary" id="cancel-user-delete" type="button">Cancelar</button>
+			<button class="button button-delete-confirm" id="confirm-user-delete" type="button">Excluir usuário</button>
+		</footer>
+	</dialog>
+</body>
+</html>

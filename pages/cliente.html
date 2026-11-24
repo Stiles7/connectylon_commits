@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="theme-color" content="#3D86FF">
+	<title>Clientes | Connect Ylon</title>
+	<link rel="manifest" href="../manifest.webmanifest">
+	<link rel="icon" type="image/svg+xml" href="../assets/img/connect-ylon-icon.svg">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../assets/css/base.css">
+	<link rel="stylesheet" href="../assets/css/dashboard.css">
+	<link rel="stylesheet" href="../assets/css/clients.css">
+	<link rel="stylesheet" href="../assets/css/manage-clients.css">
+	<link rel="stylesheet" href="../assets/css/audit.css">
+	<link rel="stylesheet" href="../assets/css/users.css">
+	<link rel="stylesheet" href="../assets/css/login.css">
+	<script src="../assets/pwa.js" defer></script>
+	<script src="../assets/sidebar.js" defer></script>
+	<script src="../assets/dialog-scroll-lock.js" defer></script>
+	<script src="../assets/row-selection.js" defer></script>
+	<script src="../assets/client-data.js" defer></script>
+	<script src="../assets/clients-page.js" defer></script>
+</head>
+<body>
+	<connect-ylon-sidebar base="../"></connect-ylon-sidebar>
+	<main class="content client-page">
+		<header class="page-header">
+			<div>
+				<h1>Clientes</h1>
+				<p>Consulte clientes, monitore cadastros e identifique informações pendentes.</p>
+			</div>
+			<p class="profile">Glaucia · Gerência</p>
+		</header>
+
+		<!-- Indicadores de clientes. -->
+		<section class="all-cards client-summary" aria-label="Resumo de clientes">
+			<article class="card">
+				<p>Total de clientes</p>
+				<h2 id="summary-total">1.248</h2>
+			</article>
+			<article class="card">
+				<p>Equipamentos cadastrados</p>
+				<h2 id="summary-equipment">3.870</h2>
+			</article>
+			<article class="card">
+				<p>Cadastros completos</p>
+				<h2 id="summary-complete">1.241</h2>
+			</article>
+			<article class="card">
+				<p>Com erro de dados</p>
+				<h2 class="error-total" id="summary-errors">7</h2>
+			</article>
+		</section>
+
+		<!-- Busca, filtros e tabela de clientes. -->
+		<section class="clients-panel" aria-label="Lista de clientes">
+			<div class="client-controls">
+				<label class="search-field client-search-field" for="clients-search">
+					<svg aria-hidden="true" viewBox="0 0 24 24">
+						<path d="M10.8 18a7.2 7.2 0 1 1 0-14.4 7.2 7.2 0 0 1 0 14.4Zm5.1-2.1 4.1 4.1"/>
+					</svg>
+					<input id="clients-search" type="search" placeholder="Buscar por nome ou código" autocomplete="off">
+				</label>
+				<div class="client-filters" role="group" aria-label="Filtrar clientes">
+					<button class="filter-chip active" type="button" data-filter="all">Todos (1.248)</button>
+					<button class="filter-chip" type="button" data-filter="complete">Completos (1.241)</button>
+					<button class="filter-chip error-filter" type="button" data-filter="errors">Com erro de dados (7)</button>
+					<span class="client-count" id="client-count" aria-live="polite"></span>
+				</div>
+			</div>
+
+			<div class="table-wrap">
+				<table class="clients-table">
+					<thead>
+						<tr>
+							<th scope="col">Código</th>
+							<th scope="col">Nome</th>
+							<th scope="col">Equipamentos</th>
+							<th scope="col">Situação dos dados</th>
+							<th scope="col">Atualizado em</th>
+							<th scope="col">Ações</th>
+						</tr>
+					</thead>
+					<tbody id="clients-body"></tbody>
+				</table>
+				<p class="empty-state" id="clients-empty" hidden>Nenhum cliente encontrado.</p>
+			</div>
+		</section>
+
+		<!-- Detalhes de equipamentos do cliente selecionado. -->
+		<dialog class="client-dialog" id="client-dialog" aria-labelledby="dialog-client-name">
+			<header class="dialog-heading">
+				<div>
+					<p id="dialog-client-code"></p>
+					<h2 id="dialog-client-name"></h2>
+				</div>
+				<button class="dialog-close" type="button" aria-label="Fechar detalhes">×</button>
+			</header>
+			<p class="client-edit-error" id="client-edit-error" role="alert" hidden></p>
+			<p class="client-edit-success" id="client-edit-success" role="status" hidden></p>
+			<div class="equipment-list" id="equipment-list"></div>
+			<footer class="client-dialog-actions">
+				<button class="button button-secondary" id="cancel-client-edit" type="button" hidden>Cancelar edição</button>
+				<button class="button button-primary" id="save-client-edit" type="button" hidden>Salvar alterações</button>
+				<button class="button button-edit" id="edit-client" type="button">Editar dados</button>
+			</footer>
+		</dialog>
+	</main>
+</body>
+</html>

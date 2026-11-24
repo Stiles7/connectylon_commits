@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="theme-color" content="#3D86FF">
+	<meta name="description" content="Dashboard administrativo da Connect Ylon">
+	<title>Dashboard | Connect Ylon</title>
+	<link rel="manifest" href="manifest.webmanifest">
+	<link rel="icon" type="image/svg+xml" href="assets/img/connect-ylon-icon.svg">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="assets/css/base.css">
+	<link rel="stylesheet" href="assets/css/dashboard.css">
+	<link rel="stylesheet" href="assets/css/clients.css">
+	<link rel="stylesheet" href="assets/css/manage-clients.css">
+	<link rel="stylesheet" href="assets/css/audit.css">
+	<link rel="stylesheet" href="assets/css/users.css">
+	<link rel="stylesheet" href="assets/css/login.css">
+	<script src="assets/pwa.js" defer></script>
+	<script src="assets/sidebar.js" defer></script>
+	<script src="assets/row-selection.js" defer></script>
+</head>
+<body>
+	<connect-ylon-sidebar base="./"></connect-ylon-sidebar>
+
+	<main class="content dashboard-page">
+		<header class="page-header">
+			<div>
+				<h1>Dashboard</h1>
+				<p>Todas as informações essenciais do sistema reunidas em um só lugar.</p>
+			</div>
+			<p class="profile">Glaucia · Gerência</p>
+		</header>
+
+		<!-- Indicadores principais do sistema. -->
+		<section class="all-cards" aria-label="Resumo do sistema">
+			<article class="card">
+				<p>Clientes</p>
+				<h2>1.248</h2>
+			</article>
+			<article class="card">
+				<p>Equipamentos</p>
+				<h2>3.870</h2>
+			</article>
+			<article class="card">
+				<p>Técnicos ativos</p>
+				<h2>14</h2>
+			</article>
+			<article class="card">
+				<p>Última importação</p>
+				<h2>12/11/2026</h2>
+			</article>
+		</section>
+
+		<!-- Histórico de importações exibido como conteúdo estático do painel. -->
+		<section class="imports-panel" aria-labelledby="imports-title">
+			<h2 id="imports-title">Últimas importações</h2>
+			<div class="table-wrap">
+				<table>
+					<thead>
+						<tr>
+							<th scope="col">Arquivo</th>
+							<th scope="col">Data</th>
+							<th scope="col">Status</th>
+							<th scope="col">Processados</th>
+							<th scope="col">Erros</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>clientes_2026-11-12.txt</td>
+							<td>12/11/2026 08:40</td>
+							<td><span class="status success">Concluída</span></td>
+							<td>160</td>
+							<td><span class="errors">3</span></td>
+						</tr>
+						<tr>
+							<td>clientes_2026-11-05.txt</td>
+							<td>05/11/2026 17:02</td>
+							<td><span class="status success">Concluída</span></td>
+							<td>1.236</td>
+							<td>0</td>
+						</tr>
+						<tr>
+							<td>clientes_2026-10-28.txt</td>
+							<td>28/10/2026 09:15</td>
+							<td><span class="status warning">Com erros</span></td>
+							<td>1.201</td>
+							<td><span class="errors">12</span></td>
+						</tr>
+						<tr>
+							<td>clientes_2026-10-14.txt</td>
+							<td>14/10/2026 14:30</td>
+							<td><span class="status success">Concluída</span></td>
+							<td>1.190</td>
+							<td>0</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</section>
+	</main>
+</body>
+</html>
