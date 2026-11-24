@@ -14,23 +14,7 @@ Protótipo de uma aplicação web responsiva para consulta técnica e gerenciame
 - **App técnico:** demonstração de busca de clientes, consulta de equipamentos, cópia de dados e telas offline/online.
 - **PWA:** manifesto e service worker para instalação e cache de recursos do app shell.
 
-## Como executar
-
-Não é necessário instalar dependências nem compilar o projeto. Como o service worker requer uma origem segura, abra o projeto em `localhost` ou em um servidor HTTPS; abrir os arquivos diretamente com `file://` não é recomendado.
-
-1. Abra a pasta do projeto no VS Code.
-2. Inicie um servidor estático, por exemplo, com a extensão **Live Server**, ou pelo PowerShell na pasta do projeto:
-
-   ```powershell
-   py -m http.server 8000
-   ```
-
-3. Acesse `http://localhost:8000/` no navegador.
-
-O Google Fonts é carregado pela internet. Sem conexão, a fonte poderá ser substituída pela fonte alternativa do navegador.
-
 ## Estrutura e arquivos
-
 ### Raiz
 
 | Arquivo | Descrição |
