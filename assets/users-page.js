@@ -1,11 +1,12 @@
+const sharedDemoEmail = 'connectylon@gmail.com';
 const users = [
-	{ id: 1, name: 'Maylon Reis', fullName: 'Maylon de Oliveira Faria dos Reis', email: 'maylonreis@visatec.com.br', username: 'aux.maylon.reis', role: 'Aux. Técnico', status: 'Ativo', lastAccess: '14/11/2026 · 09:42' },
-	{ id: 2, name: 'Bruno', fullName: 'Bruno Santos', email: 'bruno@visatec.com.br', username: 'sup.bruno', role: 'Supervisor', status: 'Ativo', lastAccess: '14/11/2026 · 08:15' },
-	{ id: 3, name: 'Mateus', fullName: 'Mateus Oliveira', email: 'mateus@visatec.com.br', username: 'tec.mateus', role: 'Técnico', status: 'Ativo', lastAccess: '13/11/2026 · 17:30' },
-	{ id: 4, name: 'João Paulo', fullName: 'João Paulo Souza', email: 'joaopaulo@visatec.com.br', username: 'aux.joao.paulo', role: 'Aux. Técnico', status: 'Ativo', lastAccess: '13/11/2026 · 16:48' },
-	{ id: 5, name: 'Lais', fullName: 'Lais Almeida', email: 'lais@visatec.com.br', username: 'est.lais', role: 'Estoquista', status: 'Inativo', lastAccess: '06/11/2026 · 10:12' },
-	{ id: 6, name: 'Silvio', fullName: 'Silvio Costa', email: 'silvio@visatec.com.br', username: 'ceo.silvio', role: 'CEO', status: 'Ativo', lastAccess: '13/11/2026 · 14:20' },
-	{ id: 7, name: 'Glaucia', fullName: 'Glaucia Oliveira', email: 'glaucia@visatec.com.br', username: 'ger.glaucia', role: 'Gerente', status: 'Ativo', lastAccess: '12/11/2026 · 11:05' }
+	{ id: 1, name: 'Connect Ylon', fullName: 'Connect Ylon', email: sharedDemoEmail, username: 'usuario999001', role: 'Aux. Técnico', status: 'Ativo', lastAccess: '14/11/2026 · 09:42' },
+	{ id: 2, name: 'Connect Ylon', fullName: 'Connect Ylon', email: sharedDemoEmail, username: 'usuario999002', role: 'Supervisor', status: 'Ativo', lastAccess: '14/11/2026 · 08:15' },
+	{ id: 3, name: 'Connect Ylon', fullName: 'Connect Ylon', email: sharedDemoEmail, username: 'usuario999003', role: 'Técnico', status: 'Ativo', lastAccess: '13/11/2026 · 17:30' },
+	{ id: 4, name: 'Connect Ylon', fullName: 'Connect Ylon', email: sharedDemoEmail, username: 'usuario999004', role: 'Aux. Técnico', status: 'Ativo', lastAccess: '13/11/2026 · 16:48' },
+	{ id: 5, name: 'Connect Ylon', fullName: 'Connect Ylon', email: sharedDemoEmail, username: 'usuario999005', role: 'Estoquista', status: 'Inativo', lastAccess: '06/11/2026 · 10:12' },
+	{ id: 6, name: 'Connect Ylon', fullName: 'Connect Ylon', email: sharedDemoEmail, username: 'usuario999006', role: 'CEO', status: 'Ativo', lastAccess: '13/11/2026 · 14:20' },
+	{ id: 7, name: 'Connect Ylon', fullName: 'Connect Ylon', email: sharedDemoEmail, username: 'usuario999007', role: 'Gerente', status: 'Ativo', lastAccess: '12/11/2026 · 11:05' }
 ];
 
 const usersBody = document.querySelector('#users-body');
@@ -107,10 +108,19 @@ function validateUser() {
 	} else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
 		message = 'Informe um endereço de e-mail válido.';
 	} else {
-		const duplicate = users.find((user) => user.id !== editingUserId
-			&& (user.email.toLowerCase() === email.toLowerCase()
-				|| user.username.toLowerCase() === username.toLowerCase()));
-		if (duplicate) message = 'Este e-mail ou nome de usuário já está cadastrado.';
+		const normalizedEmail = email.toLowerCase();
+		const normalizedUsername = username.toLowerCase();
+		const duplicateUsername = users.some((user) => user.id !== editingUserId
+			&& user.username.toLowerCase() === normalizedUsername);
+		const duplicateEmail = users.some((user) => user.id !== editingUserId
+			&& user.email.toLowerCase() === normalizedEmail);
+		const keepsSharedDemoEmail = editingUserId !== null
+			&& normalizedEmail === sharedDemoEmail
+			&& users.some((user) => user.id === editingUserId
+				&& user.email.toLowerCase() === normalizedEmail);
+		if (duplicateUsername || (duplicateEmail && !keepsSharedDemoEmail)) {
+			message = 'Este e-mail ou nome de usuário já está cadastrado.';
+		}
 	}
 
 	formError.textContent = message;

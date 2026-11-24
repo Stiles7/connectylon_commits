@@ -1,4 +1,4 @@
-const CACHE_NAME = 'connect-ylon-shell-v2';
+const CACHE_NAME = 'connect-ylon-shell-v5';
 const APP_SHELL = [
 	'./',
 	'./index.html',
