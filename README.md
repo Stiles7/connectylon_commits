@@ -15,7 +15,6 @@ Protótipo de uma aplicação web responsiva para consulta técnica e gerenciame
 - **PWA:** manifesto e service worker para instalação e cache de recursos do app shell.
 
 ## Estrutura e arquivos
-
 ### Raiz
 
 | Arquivo | Descrição |
